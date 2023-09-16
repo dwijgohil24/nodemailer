@@ -1,0 +1,43 @@
+body{
+    background: black;
+}
+
+#canvas1{
+    border: 3px solid white;
+    top : 50%;
+    left : 20%;
+    position: absolute;
+    width: 512px;
+    height: 512px;
+    transform: translate(-50%, -50%);
+}
+
+#canvas2{
+    border: 3px solid white;
+    top : 50%;
+    left : 80%;
+    position: absolute;
+    width: 512px;
+    height: 512px;
+    transform: translate(-50%, -50%);
+}
+
+#canvas3{
+    border: 3px solid white;
+    top : 150%;
+    left : 20%;
+    position: absolute;
+    width: 512px;
+    height: 512px;
+    transform: translate(-50%, -50%);
+}
+#canvas4{
+    border: 3px solid white;
+    top : 150%;
+    left : 80%;
+    position: absolute;
+    width: 512px;
+    height: 512px;
+    transform: translate(-50%, -50%);
+}
+

@@ -23,6 +23,7 @@ function generateCaptcha() {
     ctx.fillText(captcha, 10, 30);
 
     // Convert the canvas to a data URL
+    console.log("Captcha function has been called !")
     return canvas.toDataURL("image/png");
 }
 
@@ -32,7 +33,7 @@ router.post('/register', async (req, res) => {
     try {
         // Generate random captcha image and save it temporarily on the server
         const captchaDataURL = generateCaptcha();
-
+        console.log(captchaDataURL)
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -81,21 +82,67 @@ router.post('/register', async (req, res) => {
 });
 
 module.exports = router;
-
 */
+
 
 
 
 const express = require('express')
 const nodemailer = require("nodemailer")
-const router = new express.Router()
+const router = new express.Router();
 
-router.post("/register" , (req , res) => {
+/*function generateCaptcha() {
+    const charsArray = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lengthOtp = 6;
+    let captcha = "";
+
+    for (let i = 0; i < lengthOtp; i++) {
+        const index = Math.floor(Math.random() * charsArray.length);
+        captcha += charsArray[index];
+    }
+
+    const canvas = createCanvas(150, 50);
+    const ctx = canvas.getContext("2d");
+    ctx.font = "25px Georgia";
+    ctx.fillText(captcha, 10, 30);
+
+    // Convert the canvas to a Buffer containing the image data
+    const buffer = canvas.toBuffer('image/png');
+
+    // You can save the image to a file if needed
+    //fs.writeFileSync('captcha.png', buffer);
+
+    // Return the image data buffer
+    return buffer;
+}*/
+
+// async function generateCaptcha() {
+//     const charsArray = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//     const lengthOtp = 6;
+//     let captcha = "";
+
+//     for (let i = 0; i < lengthOtp; i++) {
+//         const index = Math.floor(Math.random() * charsArray.length);
+//         captcha += charsArray[index];
+//     }
+
+//     const canvas = createCanvas(150, 50);
+//     const ctx = canvas.getContext("2d");
+//     ctx.font = "25px Georgia";
+//     ctx.fillText(captcha, 10, 30);
+
+//     // Convert the canvas to a Buffer containing the image data
+//     const buffer = canvas.toBuffer('image/png');
+
+//     // Return the image data buffer
+//     return buffer;
+// }
+
+router.post("/register" , async(req , res) => {
     const {email} = req.body;
-    
+
     try {
 
-        //const captchaDataURL = generateCaptcha();
         const transporter = nodemailer.createTransport({
             service : "gmail",
             auth: {
@@ -111,6 +158,9 @@ router.post("/register" , (req , res) => {
             html : `
             <h1>Congratulations! You've received an email.</h1>
                 <p>Please find the message </p>
+                <a href = "http://localhost:5001/captcha"> Download captcha image here !</a>
+                
+                
                `
          
         }
